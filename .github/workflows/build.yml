@@ -32,9 +32,13 @@ jobs:
           cd zero_app
           cordova platform add android
 
-      - name: Find and Copy HTML
+      - name: Overwrite index.html with our own
         run: |
-          find . -name "*.html" -exec cp {} zero_app/www/index.html \;
+          # این خط دقیقاً فایل index.html که توی روت گیت‌هاب هست رو برمی‌داره
+          cp index.html zero_app/www/index.html
+          
+          # کپی کردن آیکون
+          cp icon.png zero_app/ 2>/dev/null || true
 
       - name: Build APK
         run: |
