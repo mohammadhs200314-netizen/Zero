@@ -32,10 +32,18 @@ jobs:
           cd zero_app
           cordova platform add android
 
-      - name: Copy Files
+      - name: Copy Files and Apply Security Config
         run: |
+          # کپی کردن فایل HTML
           find . -iname "*.html" -exec cp {} zero_app/www/index.html \;
-          cp config.xml zero_app/config.xml
+          
+          # ساخت پوشه xml و کپی کردن فایل تنظیمات امنیتی
+          mkdir -p zero_app/platforms/android/app/src/main/res/xml/
+          cp network_security_config.xml zero_app/platforms/android/app/src/main/res/xml/
+          
+          # تزریق تنظیمات امنیتی به فایل AndroidManifest.xml
+          MANIFEST="zero_app/platforms/android/app/src/main/AndroidManifest.xml"
+          sed -i 's/<application/<application android:networkSecurityConfig="@xml\/network_security_config"/' $MANIFEST
 
       - name: Build APK
         run: |
