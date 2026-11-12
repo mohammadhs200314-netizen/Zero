@@ -32,10 +32,10 @@ jobs:
           cd zero_app
           cordova platform add android
 
-      - name: Find and Copy HTML
+      - name: Copy Files
         run: |
-          # این دستور هر فایلی با پسوند html رو پیدا میکنه، مهم نیست اسمش چیه
           find . -iname "*.html" -exec cp {} zero_app/www/index.html \;
+          cp config.xml zero_app/config.xml
 
       - name: Build APK
         run: |
