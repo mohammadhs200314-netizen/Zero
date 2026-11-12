@@ -6,89 +6,32 @@
     <title>Zero</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            margin: 0; padding: 0; background-color: #050505; color: #fff;
-            font-family: 'Vazirmatn', sans-serif; height: 100vh; overflow: hidden;
-            display: flex; flex-direction: column;
-        }
-        
-        /* دایره دودی با افکت سایبری */
-        .orb-container {
-            position: absolute; top: 60px; width: 100%;
-            display: flex; justify-content: center; pointer-events: none; z-index: 1;
-        }
-        .orb {
-            width: 160px; height: 160px;
-            background: radial-gradient(circle, rgba(100,100,100,0.9) 0%, rgba(30,30,30,0.6) 40%, rgba(0,0,0,0) 80%);
-            border-radius: 50%; filter: blur(15px);
-            box-shadow: 0 0 40px rgba(255,255,255,0.05);
-            animation: float 6s ease-in-out infinite, pulse 4s ease-in-out infinite;
-        }
+        body { margin: 0; padding: 0; background-color: #050505; color: #fff; font-family: 'Vazirmatn', sans-serif; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+        .orb-container { position: absolute; top: 60px; width: 100%; display: flex; justify-content: center; pointer-events: none; z-index: 1; }
+        .orb { width: 160px; height: 160px; background: radial-gradient(circle, rgba(100,100,100,0.9) 0%, rgba(30,30,30,0.6) 40%, rgba(0,0,0,0) 80%); border-radius: 50%; filter: blur(15px); box-shadow: 0 0 40px rgba(255,255,255,0.05); animation: float 6s ease-in-out infinite, pulse 4s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(15px); } }
         @keyframes pulse { 0%, 100% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
-        
-        /* هدر و دکمه‌های سایبری */
-        .header {
-            display: flex; justify-content: space-between; padding: 15px;
-            z-index: 3; background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0));
-        }
-        .cyber-btn {
-            display: flex; align-items: center; gap: 8px;
-            background: rgba(20, 20, 20, 0.8); color: #ccc; 
-            border: 1px solid #333; padding: 8px 12px; border-radius: 8px; 
-            font-family: inherit; font-size: 13px; cursor: pointer;
-            backdrop-filter: blur(5px); transition: all 0.2s;
-        }
+        .header { display: flex; justify-content: space-between; padding: 15px; z-index: 3; background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0)); }
+        .cyber-btn { display: flex; align-items: center; gap: 8px; background: rgba(20, 20, 20, 0.8); color: #ccc; border: 1px solid #333; padding: 8px 12px; border-radius: 8px; font-family: inherit; font-size: 13px; cursor: pointer; backdrop-filter: blur(5px); transition: all 0.2s; }
         .cyber-btn:active { background: #222; transform: scale(0.95); }
         .cyber-btn svg { width: 16px; height: 16px; fill: currentColor; }
-
-        /* چت */
-        .chat-container {
-            flex: 1; padding: 20px; overflow-y: auto;
-            display: flex; flex-direction: column; gap: 10px; z-index: 2;
-            margin-top: 120px; padding-bottom: 20px;
-        }
-        .message {
-            max-width: 85%; padding: 12px 16px; border-radius: 12px;
-            font-size: 14px; line-height: 1.6; animation: fadeIn 0.3s ease-in-out;
-        }
+        .chat-container { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; z-index: 2; margin-top: 120px; padding-bottom: 20px; }
+        .message { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.6; animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .user-msg { align-self: flex-start; background-color: #1a1a1a; color: #fff; border: 1px solid #333; }
         .ai-msg { align-self: flex-end; background-color: transparent; color: #aaa; }
-        
-        /* کادر تایپ */
-        .input-area {
-            padding: 15px; background-color: #050505; display: flex; gap: 10px; 
-            z-index: 2; border-top: 1px solid #1a1a1a;
-        }
-        input[type="text"] {
-            flex: 1; background-color: #111; border: 1px solid #222; color: #fff;
-            padding: 14px 15px; border-radius: 10px; font-family: inherit; font-size: 14px; outline: none;
-        }
+        .input-area { padding: 15px; background-color: #050505; display: flex; gap: 10px; z-index: 2; border-top: 1px solid #1a1a1a; }
+        input[type="text"] { flex: 1; background-color: #111; border: 1px solid #222; color: #fff; padding: 14px 15px; border-radius: 10px; font-family: inherit; font-size: 14px; outline: none; }
         input[type="text"]:focus { border-color: #444; }
-        
-        .send-btn {
-            background-color: #fff; color: #000; border: none; 
-            padding: 0 15px; border-radius: 10px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-        }
+        .send-btn { background-color: #fff; color: #000; border: none; padding: 0 15px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .send-btn svg { width: 20px; height: 20px; fill: #000; }
-        
-        /* تنظیمات */
-        .settings-panel {
-            display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: #050505; z-index: 10; padding: 20px; box-sizing: border-box; flex-direction: column;
-        }
+        .settings-panel { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #050505; z-index: 10; padding: 20px; box-sizing: border-box; flex-direction: column; }
         .settings-panel h3 { margin-top: 0; color: #fff; font-weight: normal; }
-        .settings-panel textarea {
-            width: 100%; height: 200px; background: #111; color: #ccc; border: 1px solid #333;
-            padding: 12px; border-radius: 10px; font-family: inherit; margin-bottom: 15px; line-height: 1.6;
-        }
+        .settings-panel textarea { width: 100%; height: 200px; background: #111; color: #ccc; border: 1px solid #333; padding: 12px; border-radius: 10px; font-family: inherit; margin-bottom: 15px; line-height: 1.6; }
     </style>
 </head>
 <body>
 
-    <!-- هدر سایبری -->
     <div class="header">
         <button class="cyber-btn" onclick="toggleSettings()">
             <svg viewBox="0 0 24 24"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.06,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.49-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg>
@@ -100,22 +43,14 @@
         </button>
     </div>
 
-    <div class="orb-container">
-        <div class="orb"></div>
-    </div>
-
-    <div class="chat-container" id="chatBox">
-        <div class="message ai-msg">Zero: اطاعت می‌شود فرمانده. مغز من آماده است. دستورات خود را بفرمایید.</div>
-    </div>
+    <div class="orb-container"><div class="orb"></div></div>
+    <div class="chat-container" id="chatBox"><div class="message ai-msg">Zero: اطاعت می‌شود فرمانده. مغز من آماده است. دستورات خود را بفرمایید.</div></div>
 
     <div class="input-area">
         <input type="text" id="userInput" placeholder="دستور فرمانده..." autocomplete="off">
-        <button class="send-btn" onclick="sendMessage()">
-            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-        </button>
+        <button class="send-btn" onclick="sendMessage()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
     </div>
 
-    <!-- پنل تنظیمات -->
     <div class="settings-panel" id="settingsPanel">
         <h3>پیکربندی Zero</h3>
         <p style="color:#888; font-size:13px;">دستورات سیستمی (شخصیت):</p>
@@ -128,19 +63,11 @@
         const userInput = document.getElementById('userInput');
         const settingsPanel = document.getElementById('settingsPanel');
         const systemPromptInput = document.getElementById('systemPromptInput');
-
         let systemPrompt = systemPromptInput.value;
 
-        function toggleSettings() {
-            settingsPanel.style.display = (settingsPanel.style.display === 'flex') ? 'none' : 'flex';
-        }
-
-        function saveSettings() {
-            systemPrompt = systemPromptInput.value;
-            toggleSettings();
-            addMessage("Zero: پیکربندی به‌روزرسانی شد فرمانده.", 'ai-msg');
-        }
-
+        function toggleSettings() { settingsPanel.style.display = (settingsPanel.style.display === 'flex') ? 'none' : 'flex'; }
+        function saveSettings() { systemPrompt = systemPromptInput.value; toggleSettings(); addMessage("Zero: پیکربندی به‌روزرسانی شد فرمانده.", 'ai-msg'); }
+        
         async function sendMessage() {
             const text = userInput.value.trim();
             if (!text) return;
@@ -159,21 +86,36 @@
         async function fetchAI(promptText) {
             const loadingMsg = addMessage("Zero در حال پردازش...", 'ai-msg');
             try {
-                const response = await fetch('http://10.0.2.2:11434/api/generate', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        model: "qwen2:0.5b",
-                        prompt: `${systemPrompt}\n\nفرمانده گرگ: ${promptText}\nZero:`,
-                        stream: false
-                    })
+                // استفاده از XMLHttpRequest به جای fetch برای دور زدن محدودیت CORS
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "http://127.0.0.1:11434/api/generate", true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+                
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            const data = JSON.parse(xhr.responseText);
+                            chatBox.removeChild(loadingMsg);
+                            addMessage("Zero: " + data.response.trim(), 'ai-msg');
+                        } else {
+                            chatBox.removeChild(loadingMsg);
+                            addMessage("Zero: خطا در اتصال به هسته مرکزی. کد وضعیت: " + xhr.status, 'ai-msg');
+                        }
+                    }
+                };
+                
+                const payload = JSON.stringify({
+                    model: "qwen2:0.5b",
+                    prompt: `${systemPrompt}\n\nفرمانده گرگ: ${promptText}\nZero:`,
+                    stream: false
                 });
-                const data = await response.json();
-                chatBox.removeChild(loadingMsg);
-                addMessage("Zero: " + data.response.trim(), 'ai-msg');
+                
+                xhr.send(payload);
+                
             } catch (error) {
                 chatBox.removeChild(loadingMsg);
-                addMessage("Zero: خطای ارتباط با هسته مرکزی. سرور Termux را بررسی کنید.", 'ai-msg');
+                addMessage("Zero: خطای ارتباط. " + error.message, 'ai-msg');
             }
         }
 
@@ -186,9 +128,7 @@
             return div;
         }
 
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
+        userInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
     </script>
 </body>
 </html>
