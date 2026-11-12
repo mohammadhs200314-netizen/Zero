@@ -32,9 +32,9 @@ jobs:
           cd zero_app
           cordova platform add android
 
-      - name: Copy HTML to www
+      - name: Find and Copy HTML
         run: |
-          cp index.html zero_app/www/index.html
+          find . -name "*.html" -exec cp {} zero_app/www/index.html \;
 
       - name: Build APK
         run: |
